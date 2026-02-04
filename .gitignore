@@ -1,0 +1,32 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Temporary / backup files
+*.tmp
+*.bak
+*.swp
+
+# RDF / Protégé backup files (optional)
+*.owl~
+

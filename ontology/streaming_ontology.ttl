@@ -1,0 +1,273 @@
+@prefix : <http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5/> .
+
+<http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5> rdf:type owl:Ontology .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#gYear
+xsd:gYear rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#actedIn
+:actedIn rdf:type owl:ObjectProperty ;
+         owl:inverseOf :hasActor ;
+         rdfs:domain :Actor ;
+         rdfs:range :Content .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#directedBy
+:directedBy rdf:type owl:ObjectProperty ;
+            rdfs:domain :Content ;
+            rdfs:range :Director .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#hasActor
+:hasActor rdf:type owl:ObjectProperty ;
+          rdfs:domain :Content ;
+          rdfs:range :Actor .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#hasEpisode
+:hasEpisode rdf:type owl:ObjectProperty ;
+            owl:inverseOf :partOfSeries ;
+            rdfs:domain :Series ;
+            rdfs:range :Episode .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#hasGenre
+:hasGenre rdf:type owl:ObjectProperty ;
+          rdfs:domain :Content ;
+          rdfs:range :Genre .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#partOfSeries
+:partOfSeries rdf:type owl:ObjectProperty ;
+              rdfs:domain :Episode ;
+              rdfs:range :Series .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#watched
+:watched rdf:type owl:ObjectProperty ;
+         owl:inverseOf :watchedBy ;
+         rdfs:domain :User ;
+         rdfs:range :Content .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#watchedBy
+:watchedBy rdf:type owl:ObjectProperty ;
+           rdfs:domain :Content ;
+           rdfs:range :User .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Device ,
+                     :Genre ,
+                     :Person ;
+         rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#hasReleaseYear
+:hasReleaseYear rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Content ;
+                rdfs:range xsd:gYear .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#hasTitle
+:hasTitle rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Content ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#hasUserId
+:hasUserId rdf:type owl:DatatypeProperty ;
+           rdfs:domain :User ;
+           rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Actor
+:Actor rdf:type owl:Class ;
+       rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Content
+:Content rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Device
+:Device rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Director
+:Director rdf:type owl:Class ;
+          rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Episode
+:Episode rdf:type owl:Class ;
+         rdfs:subClassOf :Content ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :partOfSeries ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Series
+                         ] .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Franchise
+:Franchise rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Genre
+:Genre rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Heavy_watcher
+:Heavy_watcher rdf:type owl:Class ;
+               rdfs:subClassOf :User .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Movie
+:Movie rdf:type owl:Class ;
+       rdfs:subClassOf :Content ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasGenre ;
+                         owl:someValuesFrom :Genre
+                       ] .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Person
+:Person rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Platform
+:Platform rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Review
+:Review rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Series
+:Series rdf:type owl:Class ;
+        rdfs:subClassOf :Content .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Tag
+:Tag rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#User
+:User rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#WatchEvent
+:WatchEvent rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Action
+:Action rdf:type owl:NamedIndividual ,
+                 :Genre ;
+        :hasGenre :SciFi .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#ChristopherNolan
+:ChristopherNolan rdf:type owl:NamedIndividual ,
+                           :Director .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Cillan_Murphy
+:Cillan_Murphy rdf:type owl:NamedIndividual ,
+                        :Actor ;
+               :actedIn :Inception .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Dark
+:Dark rdf:type owl:NamedIndividual ,
+               :Series .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Fight_Club
+:Fight_Club rdf:type owl:NamedIndividual ,
+                     :Movie ;
+            :hasGenre :Action .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Inception
+:Inception rdf:type owl:NamedIndividual ,
+                    :Movie ;
+           :directedBy :ChristopherNolan ;
+           :hasActor :Cillan_Murphy ,
+                     :LeonardoDiCaprio ;
+           :hasGenre :Action ,
+                     :SciFi ;
+           :hasTitle "Inception" .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Interstellar
+:Interstellar rdf:type owl:NamedIndividual ,
+                       :Movie ;
+              :hasGenre :SciFi ;
+              :hasTitle "Interstellar" .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#LeonardoDiCaprio
+:LeonardoDiCaprio rdf:type owl:NamedIndividual ,
+                           :Actor .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Matrix
+:Matrix rdf:type owl:NamedIndividual ,
+                 :Movie ;
+        :hasGenre :Action ,
+                  :SciFi .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#SciFi
+:SciFi rdf:type owl:NamedIndividual ,
+                :Genre .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Tenet
+:Tenet rdf:type owl:NamedIndividual ,
+                :Movie ;
+       :hasGenre :Action ,
+                 :SciFi .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#Transformer
+:Transformer rdf:type owl:NamedIndividual ,
+                      :Movie ;
+             :hasGenre :Action ,
+                       :SciFi .
+
+
+###  http://www.semanticweb.org/mayankpareek/ontologies/2025/10/untitled-ontology-5#User123
+:User123 rdf:type owl:NamedIndividual ,
+                  :Heavy_watcher .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
